@@ -4,25 +4,25 @@ from dbproxy import dbProxy
 
 
 def main():
-	create = CreateDB()
+	#create = CreateDB()
 	host = "localhost"
 	proxy = dbProxy(host)
 
 	#add new user
-	newUser = User("courtney", "peverley", "cmpeverley")
+	newUser = User("daisy", "philipopoulos", "daiserdog")
 	proxy.addUser(newUser)
 
 	#add new company
-	newCompany = Company("JC Penney")
+	newCompany = Company("CVS")
 	proxy.addCompany(newCompany)
 	print(newCompany.companyID)
 
 	#add new location (and also a map to the company)
-	newLocation = Location("761 Lawson Ave", "Erie", "CO", 80516, newCompany.companyID)
+	newLocation = Location("763 Lawson Ave", "Erie", "CO", 80516, newCompany.companyID)
 	mapID = proxy.addLocation(newLocation)
 
 	#add new item (and also a map to the user who added it, and the company/location)
-	newItem = Item("Neutrogena", "makeup removing wipes", newUser.userID, mapID)
+	newItem = Item("Olay", "face wash", newUser.userID, mapID)
 	proxy.addItem(newItem)
 
 if __name__ == '__main__':

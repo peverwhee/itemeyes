@@ -22,20 +22,26 @@ class dbProxy():
 
 	def addItem(self, newItem):
 		self.cur.execute("Use ItemEyes")
-		addItem = ("INSERT INTO Items "
-					"(brand, model) "
-					"VALUES (%s, %s)")
-		dataItem = (newItem.brand, newItem.model)
-		self.cur.execute(addItem, dataItem)
-		itemID = self.cur.lastrowid
-		self.db.commit()
-		newItem.itemID = self.cur.lastrowid
-		print("added item")
+		queryCheck = ("SELECT itemID FROM Items WHERE brand = %s AND model = %s")
+		self.cur.execute(queryCheck, (newItem.brand, newItem.model))
+		results = self.cur.fetchone()
+		if (results):
+			newItem.itemID = results[0]
+			print("item already exists")
+		else:
+			addItem = ("INSERT INTO Items "
+						"(brand, model) "
+						"VALUES (%s, %s)")
+			dataItem = (newItem.brand, newItem.model)
+			self.cur.execute(addItem, dataItem)
+			self.db.commit()
+			newItem.itemID = self.cur.lastrowid
+			print("added item")
 
 		addMapQuery = ("INSERT INTO ItemMap "
 					"(clmapID, itemID, userID) "
 					"VALUES (%s, %s, %s)")
-		dataMap = (newItem.mapID, itemID, newItem.userID)
+		dataMap = (newItem.mapID, newItem.itemID, newItem.userID)
 		self.cur.execute(addMapQuery, dataMap)
 		print("added map")
 		self.db.commit()
@@ -72,6 +78,58 @@ class dbProxy():
 		self.db.commit()
 		return self.cur.lastrowid
 		
-	def queryItems(self, item, city):
-		# return results as json object
-		return queryResults
+	def queryItems(self, brand, model, zipCode):
+		# return results as two strings
+		resultsArray = []
+		self.cur.execute("USE ItemEyes")
+		if model:
+			itemQuery = ("SELECT itemID FROM Items WHERE brand = %s AND model LIKE %s")
+			model = '%' + model + '%'
+			itemData = (brand, model)
+		else:
+			itemQuery = ("SELECT itemID FROM Items WHERE brand = %s")
+			itemData = (brand,)
+		self.cur.execute(itemQuery, itemData)
+		results = self.cur.fetchall()
+		itemIDs = []
+		if (results):
+			for result in results:
+				itemIDs.append(result)
+		else:
+			temp = []
+			temp.append("none")
+			temp.append("none")
+			resultsArray.append(temp)
+			return resultsArray
+		locationQuery = ("SELECT locationID FROM Locations WHERE zip = %s")
+		self.cur.execute(locationQuery, (zipCode,))
+		results = self.cur.fetchall()
+		
+		tempResultsArray = []
+		if (results):
+			for result in results:
+				for item in itemIDs:
+					query = ("SELECT locationID FROM CompanyLocationMap INNER JOIN (ItemMap) ON (ItemMap.itemID = %s AND ItemMap.clmapID = CompanyLocationMap.clmapID AND CompanyLocationMap.locationID = %s)")
+					self.cur.execute(query, (item, result[0]))
+					res = self.cur.fetchone()
+					if (res):
+						tempResultsArray.append(res[0])
+		
+		for result in tempResultsArray:
+			query = ("SELECT streetAddress FROM Locations WHERE locationID = %s")
+			self.cur.execute(query, (result,))
+			address = self.cur.fetchone()[0]
+			temp = []
+			query = ("SELECT companyName FROM Companies INNER JOIN (CompanyLocationMap) ON (CompanyLocationMap.locationID = %s AND CompanyLocationMap.companyID = Companies.companyID)")
+			self.cur.execute(query, (result,))
+			company = self.cur.fetchone()[0]
+			temp.append(company)
+			temp.append(address)
+			resultsArray.append(temp)
+		if (len(tempResultsArray) == 0):
+			temp = []
+			temp.append("none")
+			temp.append("none")
+			resultsArray.append(temp)
+
+		return resultsArray

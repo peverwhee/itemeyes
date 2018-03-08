@@ -1,18 +1,21 @@
 $("#search-form").submit(function(event) {
-	//console.log("butts");
 	event.preventDefault();
 
 	var form = $(this);
-	var item = form.find('input[name="item-name"]').val();
-	var city = form.find('input[name="city-name"]').val();
-	console.log(item);
-
+	var brand = form.find('input[name="brand-name"]').val();
+	var zip = form.find('input[name="zip-name"]').val();
+	var model = form.find('input[name="model-name"]').val();
+	if (!model)
+	{
+		model = null
+	}
 	$.ajax({
 		method: "POST",
 		url: "http://localhost" + form.attr('action'),
 		data: JSON.stringify({
-			item: item,
-			city: city
+			brand: brand,
+			model: model,
+			zip: zip
 		})
 	})
 	.done(function(response) {

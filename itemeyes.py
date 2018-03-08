@@ -19,7 +19,8 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 import json
 import os
-from os import curdir, sep 
+from os import curdir, sep
+from dbproxy import dbProxy 
 
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -31,7 +32,6 @@ class S(BaseHTTPRequestHandler):
         #self._set_headers()
         if self.path == '/':
             self.path = '/index.html'
-        print(self.path)
         if self.path.endswith(".html"):
             mimetype='text/html'
             sendReply = True
@@ -64,7 +64,6 @@ class S(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
-        print(post_data)
         jsonResponse = handlePostRequest(self.path, post_data)
         self._set_headers()
         #convert json Response to string and pass into here
@@ -76,15 +75,20 @@ def handlePostRequest(path, data):
 
 def searchForItem(data):
     jsonData = json.loads(data)
-    print(jsonData["item"])
-    print(jsonData["city"])
-    jsonSearchResult = {}
-    jsonSearchResult['company'] = "Cuties R Us"
-    jsonSearchResult['location'] = "Guam"
-    #call dbproxy.queryItems(item, city)
-    jsonArray = [jsonSearchResult]
+    brand = jsonData["brand"]
+    zipCode = jsonData["zip"]
+    model = jsonData["model"]
+    proxy = dbProxy('localhost')
+    results = proxy.queryItems(brand, model, zipCode)
     jsonSearchResults = {}
-    jsonSearchResults['rows'] = jsonArray
+    rows = []
+    for result in results:
+        jsonSearchResult = {}
+        jsonSearchResult['company'] = result[0]
+        jsonSearchResult['location'] = result[1]
+        rows.append(jsonSearchResult)
+    
+    jsonSearchResults['rows'] = rows
     return jsonSearchResults
    
 
@@ -96,7 +100,7 @@ def run(server_class=HTTPServer, handler_class=S, port=80):
     httpd.serve_forever()
 
 def main():
-    print(os.getcwd())
+    #print(os.getcwd())
     from sys import argv
 
     if len(argv) == 2:

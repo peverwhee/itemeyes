@@ -36,7 +36,8 @@ class CreateDB():
 			"`itemID` int(11) NOT NULL AUTO_INCREMENT,"
 			"`brand` char(40) NOT NULL,"
 			"`model` char(40),"
-			"PRIMARY KEY(`itemID`)"
+			"PRIMARY KEY(`itemID`),"
+			"UNIQUE (`brand`, `model`)"
 			") ENGINE=InnoDB",
 
 			"CREATE TABLE `Companies` ("
