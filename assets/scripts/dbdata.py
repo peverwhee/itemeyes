@@ -1,9 +1,11 @@
 
 class User():
-	def __init__(self, first, last, username):
+	def __init__(self, first, last, username, passHash):
 		self.firstName = first
 		self.lastName = last
 		self.username = username
+		self.passHash = passHash
+		self.accessToken = ""
 		self.userID = -1
 
 class Item():
@@ -11,7 +13,7 @@ class Item():
 		self.brand = brand
 		self.model = model
 		self.userID = userID
-		self.mapID = mapID
+		self.clmapID = mapID
 		self.itemID = -1
 
 class Company():

@@ -20,7 +20,8 @@ import SocketServer
 import json
 import os
 from os import curdir, sep
-from dbproxy import dbProxy 
+from assets.scripts.dbproxy import dbProxy 
+from assets.scripts.dbdata import *
 
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -32,21 +33,25 @@ class S(BaseHTTPRequestHandler):
         #self._set_headers()
         if self.path == '/':
             self.path = '/index.html'
+
         if self.path.endswith(".html"):
             mimetype='text/html'
             sendReply = True
-        if self.path.endswith(".jpg"):
+        elif self.path.endswith(".jpg"):
             mimetype='image/jpg'
             sendReply = True
-        if self.path.endswith(".gif"):
+        elif self.path.endswith(".gif"):
             mimetype='image/gif'
             sendReply = True
-        if self.path.endswith(".js"):
+        elif self.path.endswith(".js"):
             mimetype='application/javascript'
             sendReply = True
-        if self.path.endswith(".css"):
+        elif self.path.endswith(".css"):
             mimetype='text/css'
             sendReply = True
+        else:
+            sendReply = False
+            print("Not sending response for " + self.path)
 
         if sendReply == True:
             #Open the static file requested and send it
@@ -72,6 +77,45 @@ class S(BaseHTTPRequestHandler):
 def handlePostRequest(path, data):
     if(path == "/search"):
         return searchForItem(data)
+    elif(path == "/add"):
+        return addItem(data)
+    elif(path == "/login"):
+        return login(data)
+    elif(path == "/create"):
+        return create(data)
+
+def create(data):
+    #check if username already in db
+    # if not, add it with names, passhash, username
+    jsonData = json.loads(data)
+    firstName = jsonData["firstName"]
+    lastName = jsonData["lastName"]
+    username = jsonData["username"]
+    passHash = jsonData["passHash"]
+    proxy = dbProxy('localhost')
+    newUser = User(firstName, lastName, username, passHash)
+    addUser = proxy.addUser(newUser)
+    if (addUser == "no!"):
+        addUser = ""
+    jsonAccessToken = {}
+    jsonAccessToken['token'] = addUser
+    return jsonAccessToken
+
+def login(data):
+    # check username/passHash combo
+    # if not, return some error
+    # if yes, return username in JSON form
+    jsonData = json.loads(data)
+    username = jsonData["username"]
+    passHash = jsonData["passHash"]
+    proxy = dbProxy('localhost')
+    results = proxy.queryUsers(username, passHash)
+    if (results == "no!"):
+        results = ""
+    jsonAccessToken = {}
+    jsonAccessToken['token'] = results
+    return jsonAccessToken
+
 
 def searchForItem(data):
     jsonData = json.loads(data)
@@ -91,7 +135,36 @@ def searchForItem(data):
     jsonSearchResults['rows'] = rows
     return jsonSearchResults
    
+def addItem(data):
+    jsonData = json.loads(data)
+    brand = jsonData["brand"]
+    model = jsonData["model"]
+    company = jsonData["company"]
+    address = jsonData["address"]
+    city = jsonData["city"]
+    state = jsonData["state"]
+    zipCode = jsonData["zip"]
+    token = jsonData["token"]
+    proxy = dbProxy('localhost')
+    userID = proxy.queryUsersByToken(token)
 
+    # add company if not already in there; get companyID for mapping
+    newCompany = Company(company)
+    companyID = proxy.addCompany(newCompany)
+
+    # add location if not already in there; get locationID for mapping
+    newLocation = Location(address,city,state,zipCode,companyID)
+    clmapID = proxy.addLocation(newLocation)
+
+    # add item if not already there!
+    newItem = Item(brand,model,userID, clmapID)
+    proxy.addItem(newItem)
+
+    jsonSearchResults = {}
+    jsonSearchResults['item'] = brand
+    return jsonSearchResults
+
+    #finish this for adding company, then location, then item
 
 def run(server_class=HTTPServer, handler_class=S, port=80):
     server_address = ('', port)

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Log in!</title>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="./assets/css/index.css">
+	<meta charset="UTF-8">
+</head>
+<body>
+	<h1>Log In</h1>
+	<div class="tab">
+		<button class="tablinks" onclick="openTab(event, 'login')">Log In</button>
+		<button class="tablinks" onclick="openTab(event, 'create-account')">Create Account</button>
+	</div>
+	<div id="login" class="tabcontent">
+		<form id="login-form" action="/login" method="post">
+			<table>
+			<tr>
+			<td>
+				<label for="username-input">Username:</label>
+			</td>
+			<td>
+				<input id="username-input" type="text" name="username-name" placeholder="Enter Username">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="pass-input">Password:</label>
+			</td>
+			<td>
+				<input id="pass-input" type="password" name="pass-name" placeholder="Enter Password">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<input type="submit" value="Submit">
+			</td>
+			</tr>
+			</table>
+		</form>
+		<div id="login-fail">
+			
+		</div>
+	</div>
+	<div id="create-account" class="tabcontent">
+		<form id="create-account-form" action="/create" method="post">
+			<table>
+			<tr>
+			<td>
+				<label for="first-input">First Name:</label>
+			</td>
+			<td>
+				<input id="first-input" type="text" name="first-name" placeholder="Enter First Name">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="last-input">Last Name:</label>
+			</td>
+			<td>
+				<input id="last-input" type="text" name="last-name" placeholder="Enter Last Name">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="username-input-create">Username:</label>
+			</td>
+			<td>
+				<input id="username-input-create" type="text" name="username-name-create" placeholder="Enter Username">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="pass1-input">Password:</label>
+			</td>
+			<td>
+				<input id="pass1-input" type="password" name="pass1-name" placeholder="Enter Password">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="pass2-input">Reenter Password:</label>
+			</td>
+			<td>
+				<input id="pass2-input" type="password" name="pass2-name" placeholder="Reenter Password">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<input type="submit" value="Create Account">
+			</td>
+			</tr>
+			</table>
+		</form>
+		<div id="create-fail">
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="./assets/scripts/login.js"></script>
+	<script type="text/javascript" src="./assets/scripts/common.js"></script>
+</body>
+</html>

@@ -28,6 +28,8 @@ class CreateDB():
 			"`lastName` char(40),"
 			"`username` char(40) NOT NULL,"
 			"`date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
+			"`passHash` char(32) NOT NULL,"
+			"`accessToken` char(128),"
 			"PRIMARY KEY(`userID`),"
 			"UNIQUE(`username`)"
 			") ENGINE=InnoDB",

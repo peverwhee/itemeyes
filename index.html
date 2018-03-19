@@ -11,46 +11,123 @@
 </head>
 <body>
 	<header>
+		<button id="logout-button" onclick="logoutButtonClick()"">Log Out</button>
 		<h1>ItemEyes: A Thing</h1>
 	</header>
-	<form id="search-form" action="/search" method="post">
-		<table>
-		<tr>
-		<td>
-			<label for="brand-input">Brand:</label>
-		</td>
-		<td>
-			<input id="brand-input" type="text" name="brand-name" placeholder="Enter Brand">
-		</td>
-		</tr>
-		<tr>
-		<td>
-			<label for="model-input">Model:</label>
-		</td>
-		<td>
-			<input id="model-input" type="text" name="model-name" placeholder="Enter Model">
-		</td>
-		</tr>
-		<tr>
-		<td>
-			<label for="zip-input">Zip Code:</label>
-		</td>
-		<td>
-			<input id="zip-input" type="text" name="zip-name" placeholder="Enter Zip Code">
-		</td>
-		
-		</tr>
-		<tr>
-		<td>
-			<input type="submit" value="Search">
-		</td>
-		</tr>
-		</table>
-	</form>
-	<div id="item-search-results">
-		
+	<div class="tab">
+		<button class="tablinks" onclick="openTab(event, 'search')">Search</button>
+		<button class="tablinks" onclick="openTab(event, 'add')">Add Item</button>
+	</div>
+	<div id="search" class="tabcontent">
+		<form id="search-form" action="/search" method="post">
+			<table>
+			<tr>
+			<td>
+				<label for="brand-input">Brand:</label>
+			</td>
+			<td>
+				<input id="brand-input" type="text" name="brand-name" placeholder="Enter Brand">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="model-input">Model:</label>
+			</td>
+			<td>
+				<input id="model-input" type="text" name="model-name" placeholder="Enter Model">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="zip-input">Zip Code:</label>
+			</td>
+			<td>
+				<input id="zip-input" type="text" name="zip-name" placeholder="Enter Zip Code">
+			</td>
+			
+			</tr>
+			<tr>
+			<td>
+				<input type="submit" value="Search">
+			</td>
+			</tr>
+			</table>
+		</form>
+		<div id="item-search-results">
+			
+		</div>
+	</div>
+	<div id="add" class="tabcontent">
+		<form id="add-form" action="/add" method="post">
+			<table>
+			<tr>
+			<td>
+				<label for="brand-input-add">Brand:</label>
+			</td>
+			<td>
+				<input id="brand-input-add" type="text" name="brand-name-add" placeholder="Enter Brand">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="model-input-add">Model (optional):</label>
+			</td>
+			<td>
+				<input id="model-input-add" type="text" name="model-name-add" placeholder="Enter Model">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="company-input-add">Company:</label>
+			</td>
+			<td>
+				<input id="company-input-add" type="text" name="company-name-add" placeholder="Enter Company">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="address-input-add">Street Address:</label>
+			</td>
+			<td>
+				<input id="address-input-add" type="text" name="address-name-add" placeholder="Street Address">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="city-input-add">City:</label>
+			</td>
+			<td>
+				<input id="city-input-add" type="text" name="city-name-add" placeholder="Enter City">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="state-input-add">State (abbr.):</label>
+			</td>
+			<td>
+				<input id="state-input-add" type="text" name="state-name-add" placeholder="Enter State">
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<label for="zip-input-add">Zip Code:</label>
+			</td>
+			<td>
+				<input id="zip-input-add" type="text" name="zip-name-add" placeholder="Enter Zip Code">
+			</td>
+			<tr>
+			<td>
+				<input type="submit" value="Add Item">
+			</td>
+			</tr>
+			</table>
+		</form>
+		<div id="add-success">
+			
+		</div>
 	</div>
 
-	<script type="text/javascript" src="./assets/scripts/search.js"></script>
+	<script type="text/javascript" src="./assets/scripts/index.js"></script>
+	<script type="text/javascript" src="./assets/scripts/common.js"></script>
 </body>
 </html>

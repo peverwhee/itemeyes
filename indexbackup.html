@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ItemEyes</title>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="./assets/css/index.css">
+	<meta charset="UTF-8">
+</head>
+<body>
+	<header>
+		<h1>ItemEyes: A Thing</h1>
+	</header>
+	<form id="search-form" action="/search" method="post">
+		<table>
+		<tr>
+		<td>
+			<label for="brand-input">Brand:</label>
+		</td>
+		<td>
+			<input id="brand-input" type="text" name="brand-name" placeholder="Enter Brand">
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<label for="model-input">Model:</label>
+		</td>
+		<td>
+			<input id="model-input" type="text" name="model-name" placeholder="Enter Model">
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<label for="zip-input">Zip Code:</label>
+		</td>
+		<td>
+			<input id="zip-input" type="text" name="zip-name" placeholder="Enter Zip Code">
+		</td>
+		
+		</tr>
+		<tr>
+		<td>
+			<input type="submit" value="Search">
+		</td>
+		</tr>
+		</table>
+	</form>
+	<div id="item-search-results">
+		
+	</div>
+
+	<script type="text/javascript" src="./assets/scripts/search.js"></script>
+</body>
+</html>
