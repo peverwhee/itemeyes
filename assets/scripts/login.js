@@ -14,7 +14,7 @@ $("#login-form").submit(function(event) {
 	var passHash = hash(pass);
 	$.ajax({
 		method: "POST",
-		url: "http://localhost" + form.attr('action'),
+		url: form.attr('action'),
 		data: JSON.stringify({
 			username: username,
 			passHash: passHash,
@@ -44,7 +44,7 @@ $('#create-account-form').submit(function(event) {
 	var passHash = hash(pass1);
 	$.ajax({
 		method: "POST",
-		url: "http://localhost" + form.attr('action'),
+		url: form.attr('action'),
 		data: JSON.stringify({
 			firstName: first,
 			lastName: last,
