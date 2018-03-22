@@ -18,7 +18,7 @@ $("#search-form").submit(function(event) {
 	}
 	$.ajax({
 		method: "POST",
-		url: "http://localhost" + form.attr('action'),
+		url: form.attr('action'),
 		data: JSON.stringify({
 			brand: brand,
 			model: model,
@@ -52,7 +52,7 @@ $("#add-form").submit(function(event) {
 	var token = localStorage.getItem("token");
 	$.ajax({
 		method: "POST",
-		url: "http://localhost" + form.attr('action'),
+		url: form.attr('action'),
 		data: JSON.stringify({
 			brand: brand,
 			model: model,
