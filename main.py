@@ -17,7 +17,7 @@ class SearchHandler(webapp2.RequestHandler):
 	    zipCode = jsonData["zip"]
 	    model = jsonData["model"]
 	    # THIS WILL CHANGE (LOCATION OF DB)
-	    proxy = dbProxy('localhost')
+	    proxy = dbProxy('104.197.164.53')
 	    results = proxy.queryItems(brand, model, zipCode)
 	    jsonSearchResults = {}
 	    rows = []
@@ -46,7 +46,7 @@ class AddHandler(webapp2.RequestHandler):
 	    state = jsonData["state"]
 	    zipCode = jsonData["zip"]
 	    token = jsonData["token"]
-	    proxy = dbProxy('localhost')
+	    proxy = dbProxy('104.197.164.53')
 	    userID = proxy.queryUsersByToken(token)
 
 	    # add company if not already in there; get companyID for mapping
@@ -78,7 +78,7 @@ class LoginHandler(webapp2.RequestHandler):
 	    jsonData = json.loads(data)
 	    username = jsonData["username"]
 	    passHash = jsonData["passHash"]
-	    proxy = dbProxy('localhost')
+	    proxy = dbProxy('104.197.164.53')
 	    results = proxy.queryUsers(username, passHash)
 	    if (results == "no!"):
 	        results = ""
@@ -100,7 +100,7 @@ class CreateHandler(webapp2.RequestHandler):
 	    lastName = jsonData["lastName"]
 	    username = jsonData["username"]
 	    passHash = jsonData["passHash"]
-	    proxy = dbProxy('localhost')
+	    proxy = dbProxy('104.197.164.53')
 	    newUser = User(firstName, lastName, username, passHash)
 	    addUser = proxy.addUser(newUser)
 	    if (addUser == "no!"):
