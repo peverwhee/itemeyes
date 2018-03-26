@@ -3,13 +3,14 @@ import MySQLdb
 
 class CreateDB():
 	def __init__(self):
-		db = MySQLdb.connect(host="localhost",
+		db = MySQLdb.connect(host="127.0.0.1",
 					user="root",
-					passwd="root")
+					passwd="root",
+					port=3307)
 
 		self.cur = db.cursor()
-		self.cur.execute("DROP DATABASE ItemEyes")
-		print("dropped database")
+		#self.cur.execute("DROP DATABASE ItemEyes")
+		#print("dropped database")
 		self.cur.execute("CREATE DATABASE IF NOT EXISTS ItemEyes")
 		print("added new")
 		self.cur.execute("USE ItemEyes")

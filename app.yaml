@@ -2,17 +2,32 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+env_variables:
+  CLOUDSQL_CONNECTION_NAME: itemeyes-199123:us-central1:itemeyes
+  CLOUDSQL_USER: root
+  CLOUDSQL_PASSWORD: root
+
+libraries:
+- name: MySQLdb
+  version: "latest"
+
 handlers:
-- url: /.*
+- url: /
   script: main.app
 
 - url: /assets
   static_dir: assets
+  application_readable: true
 
-- url: /
+- url: /index.html
   static_files: index.html
   upload: index.html
+  application_readable: true
 
-- url: /
+- url: /login.html
   static_files: login.html
   upload: login.html
+  application_readable: true
+
+- url: /.*
+  script: main.app

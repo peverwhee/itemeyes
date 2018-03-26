@@ -92,7 +92,7 @@ def create(data):
     lastName = jsonData["lastName"]
     username = jsonData["username"]
     passHash = jsonData["passHash"]
-    proxy = dbProxy('localhost')
+    proxy = dbProxy('localhost', 0, False)
     newUser = User(firstName, lastName, username, passHash)
     addUser = proxy.addUser(newUser)
     if (addUser == "no!"):
@@ -108,7 +108,7 @@ def login(data):
     jsonData = json.loads(data)
     username = jsonData["username"]
     passHash = jsonData["passHash"]
-    proxy = dbProxy('localhost')
+    proxy = dbProxy('localhost', 0, False)
     results = proxy.queryUsers(username, passHash)
     if (results == "no!"):
         results = ""
@@ -122,7 +122,7 @@ def searchForItem(data):
     brand = jsonData["brand"]
     zipCode = jsonData["zip"]
     model = jsonData["model"]
-    proxy = dbProxy('localhost')
+    proxy = dbProxy('localhost', 0, False)
     results = proxy.queryItems(brand, model, zipCode)
     jsonSearchResults = {}
     rows = []
@@ -145,7 +145,7 @@ def addItem(data):
     state = jsonData["state"]
     zipCode = jsonData["zip"]
     token = jsonData["token"]
-    proxy = dbProxy('localhost')
+    proxy = dbProxy('localhost', 0, False)
     userID = proxy.queryUsersByToken(token)
 
     # add company if not already in there; get companyID for mapping

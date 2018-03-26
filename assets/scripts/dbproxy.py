@@ -1,12 +1,26 @@
 #!/usr/bin/python
 import MySQLdb
 import random, string
+import os
 
 class dbProxy():
-	def __init__(self, host):
-		self.db = MySQLdb.connect(host=host,
+	def __init__(self, host, port, useAppEngine):
+		if (useAppEngine):
+			self.db = MySQLdb.connect(
+				unix_socket=host,
+				user="root",
+				passwd="root")
+		else:	
+			if (port != 0):
+				self.db = MySQLdb.connect(
+					host=host,
 					user="root",
-					passwd="root")
+					passwd="root",
+					port=port)
+			else:
+				self.db = MySQLdb.connect(host=host,
+							user="root",
+							passwd="root")
 		self.cur = self.db.cursor()
 
 	def randomWord(self, length):
