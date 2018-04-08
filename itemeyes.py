@@ -147,21 +147,24 @@ def addItem(data):
     token = jsonData["token"]
     proxy = dbProxy('localhost', 0, False)
     userID = proxy.queryUsersByToken(token)
+    if (userID=="no!"):
+        jsonSearchResults['item'] = ""
 
     # add company if not already in there; get companyID for mapping
-    newCompany = Company(company)
-    companyID = proxy.addCompany(newCompany)
+    else:
+        newCompany = Company(company)
+        companyID = proxy.addCompany(newCompany)
 
-    # add location if not already in there; get locationID for mapping
-    newLocation = Location(address,city,state,zipCode,companyID)
-    clmapID = proxy.addLocation(newLocation)
+        # add location if not already in there; get locationID for mapping
+        newLocation = Location(address,city,state,zipCode,companyID)
+        clmapID = proxy.addLocation(newLocation)
 
-    # add item if not already there!
-    newItem = Item(brand,model,userID, clmapID)
-    proxy.addItem(newItem)
+        # add item if not already there!
+        newItem = Item(brand,model,userID, clmapID)
+        proxy.addItem(newItem)
 
-    jsonSearchResults = {}
-    jsonSearchResults['item'] = brand
+        jsonSearchResults = {}
+        jsonSearchResults['item'] = brand
     return jsonSearchResults
 
     #finish this for adding company, then location, then item

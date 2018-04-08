@@ -64,20 +64,24 @@ class AddHandler(webapp2.RequestHandler):
 	    #proxy = dbProxy('127.0.0.1', 3307)
 	    userID = proxy.queryUsersByToken(token)
 
-	    # add company if not already in there; get companyID for mapping
-	    newCompany = Company(company)
-	    companyID = proxy.addCompany(newCompany)
+	    if (userID=="no!"):
+        jsonSearchResults['item'] = ""
 
-	    # add location if not already in there; get locationID for mapping
-	    newLocation = Location(address,city,state,zipCode,companyID)
-	    clmapID = proxy.addLocation(newLocation)
+    	# add company if not already in there; get companyID for mapping
+    	else:
+	        newCompany = Company(company)
+	        companyID = proxy.addCompany(newCompany)
 
-	    # add item if not already there!
-	    newItem = Item(brand,model,userID, clmapID)
-	    proxy.addItem(newItem)
+	        # add location if not already in there; get locationID for mapping
+	        newLocation = Location(address,city,state,zipCode,companyID)
+	        clmapID = proxy.addLocation(newLocation)
 
-	    jsonSearchResults = {}
-	    jsonSearchResults['item'] = brand
+	        # add item if not already there!
+	        newItem = Item(brand,model,userID, clmapID)
+	        proxy.addItem(newItem)
+
+	        jsonSearchResults = {}
+	        jsonSearchResults['item'] = brand
 	    return jsonSearchResults
 
 class LoginHandler(webapp2.RequestHandler):

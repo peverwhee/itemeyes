@@ -3,10 +3,10 @@ import MySQLdb
 
 class CreateDB():
 	def __init__(self):
-		db = MySQLdb.connect(host="127.0.0.1",
+		db = MySQLdb.connect(host="104.197.164.53",
 					user="root",
 					passwd="root",
-					port=3307)
+					port=3306)
 
 		self.cur = db.cursor()
 		#self.cur.execute("DROP DATABASE ItemEyes")
@@ -15,7 +15,9 @@ class CreateDB():
 		print("added new")
 		self.cur.execute("USE ItemEyes")
 		self.setupTables()
-		
+		self.cur.execute("INSERT INTO Users (firstName, lastName, username, passHash, accessToken) "
+							"VALUES ('test', 'user', 'testUser', '1234xyz', '1234xyz')")
+		db.commit()
 		self.cur.close()
 		db.commit()
 		db.close()
