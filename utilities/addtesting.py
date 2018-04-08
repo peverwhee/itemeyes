@@ -1,4 +1,5 @@
 import requests
+import datetime
 import json
 
 def sendPostRequest(token, brand, model, company, address, city, state, zipCode):
@@ -21,10 +22,12 @@ def sendPostRequest(token, brand, model, company, address, city, state, zipCode)
 	jsonObject = json.loads(jsonText)
 
 def main():
+	print("start time is:")
+	print(datetime.datetime.now().time())
 	state = 'CA'
 	zipCode = 12345
 	token = "1234xyz"
-	for i in range(114, 124):
+	for i in range(1, 10):
 		brand = 'brand' + `i`
 		model = 'model' + `i`
 		company = 'company' + `i`
@@ -32,6 +35,8 @@ def main():
 		city = 'city' + `i`
 		sendPostRequest(token, brand, model, company, address, city, state, zipCode)
 
+	print("end time is:")
+	print(datetime.datetime.now().time())
 
 if __name__ == '__main__':
 	main()
