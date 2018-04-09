@@ -65,7 +65,7 @@ class AddHandler(webapp2.RequestHandler):
 
 		if (userID=="no!"):
 			jsonSearchResults['item'] = ""
-		# add company if not already in there; get companyID for mapping
+			# add company if not already in there; get companyID for mapping
 		else:
 			newCompany = Company(company)
 			companyID = proxy.addCompany(newCompany)
