@@ -33,7 +33,10 @@ class dbProxy():
 		tokenData = (token,)
 		self.cur.execute(userQuery, tokenData)
 		results = self.cur.fetchone()
-		return results
+		if (results):
+			return results
+		else:
+			return "no!"
 
 	def queryUsers(self, username, passHash):
 		self.cur.execute("Use ItemEyes")
@@ -72,7 +75,6 @@ class dbProxy():
 		dataUser = (newUser.firstName, newUser.lastName, newUser.username, newUser.passHash, token)
 		self.cur.execute(addUserQuery, dataUser)
 		self.db.commit()
-		print("added user")
 		return token
 		#newUser.userID = self.cur.lastrowid
 		#return self.cur.lastrowid
@@ -94,7 +96,6 @@ class dbProxy():
 			self.cur.execute(addItem, dataItem)
 			newItem.itemID = self.cur.lastrowid
 			self.db.commit()
-			print("added item")
 
 		# now check if item is already mapped to the given location/company
 		mapCheck = ("SELECT ItemMap.itemMapID FROM ItemMap WHERE itemID = %s AND clmapID = %s")
@@ -110,7 +111,6 @@ class dbProxy():
 					"VALUES (%s, %s, %s)")
 		dataMap = (newItem.clmapID, newItem.itemID, newItem.userID)
 		self.cur.execute(addMapQuery, dataMap)
-		print("added map")
 		self.db.commit()
 		
 
@@ -130,7 +130,6 @@ class dbProxy():
 						"VALUES (%s)")
 		self.cur.execute(addCompanyQuery, (newCompany.companyName,))
 		self.db.commit()
-		print("added company")
 		newCompany.companyID = self.cur.lastrowid
 		return newCompany.companyID
 
@@ -150,7 +149,6 @@ class dbProxy():
 							"VALUES (%s, %s, %s, %s)")
 			dataLocation = (newLocation.streetAddress, newLocation.city, newLocation.state, newLocation.zipCode)
 			self.cur.execute(addLocationQuery,dataLocation)
-			print("added location")
 			newLocation.locationID = self.cur.lastrowid
 			self.db.commit()
 
@@ -168,7 +166,6 @@ class dbProxy():
 					"VALUES (%s, %s)")
 		dataMap = (newLocation.companyID, newLocation.locationID)
 		self.cur.execute(addMapQuery, dataMap)
-		print("added map")
 		self.db.commit()
 		return self.cur.lastrowid
 

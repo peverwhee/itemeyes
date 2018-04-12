@@ -75,7 +75,14 @@ $("#add-form").submit(function(event) {
 
 function addItem(response) {
 	console.log(response);
-	results = "<p> Item added! </p>";
+	var jsonData = JSON.parse(response);
+	var results = ""
+	if (jsonData.item == "") {
+		results = "<p> Invalid User! </p>";
+	}
+	else {
+		results = "<p> Item added! </p>";
+	}
 	$("#add-success").html(results);
 }
 

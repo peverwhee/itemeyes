@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "itemeyes-199123",
+  "private_key_id": "a5c557b52899c8f0138c8383d49ca64a3bd5e7a9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCb927G/2CSJtps\nc8itBVaHNXuYkNJhwq2Ha3ny/swNUMIk+0W7ofWtRjGSpVgmkhbhjExZAKn1GlxZ\n2SXhc9MY+a+0QUrwmO1vo5wYC3j7I48YAR+J9G/wQxXlOanUItEYmAlOxGm3DQq3\n6ott9S/lNh1DJX6joezeq3OAX8LreRoMvM4i7y/w4rdQMHAKbTpTjNVHn+dx72YT\n5cw1cXU05p3X/7EI69t84RwqCW5FUrWfI+7JG36VhHItNF/cq71BcOI0/bPVOKXw\nv8SIWF0XLZzLEP147lgjwIfO6uNU6r6TJF1L9srDOhDvJhnJxCEGUfICWsPb+17T\nX21tkr6jAgMBAAECggEAEXS9Ekqs3U657Z9721mYmKN0xNuYoFZwo5J04KyB3A+o\n2wjAgkKbQ5xyme4lkpOROgdA2ElJvGQJ6Ah0w+n5u3beoncYUxtan78ZDlviW4Fc\nV5xwkjkoeiSYA8LTbinDa1RA3m7/QfyUsYbvugvSI35OAiDlLp1F7JoV4E1XfJEx\ngy1yX09pIkoyDc4F9DUb6AV/xmZWJ5KoZ9JHa2wS0ZeKSGkFQiAr8Xpc8moMcAeo\nq9aAsshHiNmDP6V1wbJsuTm8tE4kSz781VGomfKmfLyv305KBp0BgLrrvloQ7WR9\nPgJkKVvzlig14Re8dKTQ6GRZs0DwuGHpk6fRDguGAQKBgQDQjUz0pu1Rt1lB67dY\nq+Xs5RhC6Ql6nyqKickBH1w8uTJvvovMMLlaMA9EqY8WLIvKV/mQAj8x4u7ltdVg\ne5t0hP/woQzCFEZuNhU9N3lg66eO9nbIb5rzlJYN5WOAesSsimeMIoLJwvdEVYxC\ncXKK6gzTn2jNzcvOlD2w3h71AQKBgQC/c2W+ccnw31dCOjR76VQHWGsn0dy7SMa+\nNK95dn9hraKGQvCJm5gHt3eJpSjAGXjAOj76ZCA9uHInzkj+64KbC5S4RMptbgvM\nJzEKWT0QOYNPetS5jz2KZrxPxuneEnby/VZyK3BFeSpm7B7mcaW/q6KLvuMp+iFl\nH7T+ohG/owKBgE2vFKddNrFltp3Ti+w/u9nOTIc//wPqHhKU2IbOg7Eq2xq8w54/\n2As8M7PD5UTBOyEYPCHkdF3ExnBSlzTlVjbFBAFCPFpe6w1KoAa5j0EHBtc9/2kS\nCYoKIwryE2pcUL5kn8WXZVh6g1i09RYa5CvSmwyJKKTgr7Y3ifNECgwBAoGAaPSC\nWp1W784AsDXof+WyQzSdyf6q26FSEwQfDp9/xbTC3IfmBgpelhxmU/dPF8DfCcLk\ns7AgXLW5H0lfiyDhQM5ggYR01Pj3TrxNjjbN2w8shW35IKD+Q9l+ct3BaBUHUL7B\nnWVi7zM1o6beacbz7tfRDHthXanalO2E8/M1d7ECgYEApwUJo8WjMNg64cd8xHFc\nIek28gED4uw+e9YeUlzcN29dHdS32CtSAybIw1LHixPv6QYeC1KSL5hGJZ9RxDh1\nWVlIDIbJWXB7TR7u8OV8oGJm/Ag2y7vfxyfzJkzd+wUudLPisalmz8gfa4OPIVpc\nyMK/1DGmnE8onX9qsTPGmRk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "kubecharles@itemeyes-199123.iam.gserviceaccount.com",
+  "client_id": "110562047509366700862",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kubecharles%40itemeyes-199123.iam.gserviceaccount.com"
+}

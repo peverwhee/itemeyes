@@ -15,6 +15,7 @@ Send a POST request::
     curl -d "foo=bar&bin=baz" http://localhost
 
 """
+import sys
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 import json
@@ -75,6 +76,7 @@ class S(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(jsonResponse))
 
 def handlePostRequest(path, data):
+
     if(path == "/search"):
         return searchForItem(data)
     elif(path == "/add"):
@@ -92,7 +94,7 @@ def create(data):
     lastName = jsonData["lastName"]
     username = jsonData["username"]
     passHash = jsonData["passHash"]
-    proxy = dbProxy('localhost', 0, False)
+    proxy = dbProxy(dbHost, 0, False)
     newUser = User(firstName, lastName, username, passHash)
     addUser = proxy.addUser(newUser)
     if (addUser == "no!"):
@@ -108,7 +110,7 @@ def login(data):
     jsonData = json.loads(data)
     username = jsonData["username"]
     passHash = jsonData["passHash"]
-    proxy = dbProxy('localhost', 0, False)
+    proxy = dbProxy(dbHost, 0, False)
     results = proxy.queryUsers(username, passHash)
     if (results == "no!"):
         results = ""
@@ -122,7 +124,7 @@ def searchForItem(data):
     brand = jsonData["brand"]
     zipCode = jsonData["zip"]
     model = jsonData["model"]
-    proxy = dbProxy('localhost', 0, False)
+    proxy = dbProxy(dbHost, 0, False)
     results = proxy.queryItems(brand, model, zipCode)
     jsonSearchResults = {}
     rows = []
@@ -145,41 +147,47 @@ def addItem(data):
     state = jsonData["state"]
     zipCode = jsonData["zip"]
     token = jsonData["token"]
-    proxy = dbProxy('localhost', 0, False)
+    proxy = dbProxy(dbHost, 0, False)
     userID = proxy.queryUsersByToken(token)
+    if (userID=="no!"):
+        jsonSearchResults={}
+        jsonSearchResults['item'] = ""
 
     # add company if not already in there; get companyID for mapping
-    newCompany = Company(company)
-    companyID = proxy.addCompany(newCompany)
+    else:
+        newCompany = Company(company)
+        companyID = proxy.addCompany(newCompany)
 
-    # add location if not already in there; get locationID for mapping
-    newLocation = Location(address,city,state,zipCode,companyID)
-    clmapID = proxy.addLocation(newLocation)
+        # add location if not already in there; get locationID for mapping
+        newLocation = Location(address,city,state,zipCode,companyID)
+        clmapID = proxy.addLocation(newLocation)
 
-    # add item if not already there!
-    newItem = Item(brand,model,userID, clmapID)
-    proxy.addItem(newItem)
+        # add item if not already there!
+        newItem = Item(brand,model,userID, clmapID)
+        proxy.addItem(newItem)
 
-    jsonSearchResults = {}
-    jsonSearchResults['item'] = brand
+        jsonSearchResults = {}
+        jsonSearchResults['item'] = brand
     return jsonSearchResults
 
     #finish this for adding company, then location, then item
 
-def run(server_class=HTTPServer, handler_class=S, port=80):
+
+def run(dbHost, server_class=HTTPServer, handler_class=S, port=80):
+    #handler_class.setDbHost(dbHost)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print 'Starting httpd...'
     httpd.serve_forever()
 
-def main():
-    #print(os.getcwd())
-    from sys import argv
+dbHost = ""
 
-    if len(argv) == 2:
-        run(port=int(argv[1]))
-    else:
-        run()
+def main():
+    from sys import argv
+    global dbHost
+    dbHost = argv[1]
+
+    run(dbHost)
 
 if __name__ == "__main__":
     main()
