@@ -10,7 +10,9 @@ class dbProxy():
 				unix_socket=host,
 				user="root",
 				passwd="root")
-		else:	
+		else:
+			if (host=="127.0.0.1"):
+				port=3306	
 			if (port != 0):
 				self.db = MySQLdb.connect(
 					host=host,

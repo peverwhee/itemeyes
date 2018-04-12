@@ -18,4 +18,4 @@ COPY assets/css /assets/css
 
 RUN pip install mysqlclient
 
-ENTRYPOINT python itemeyes.py 127.0.0.1:3306
+ENTRYPOINT python itemeyes.py 127.0.0.1
