@@ -5,6 +5,7 @@ import os
 
 class dbProxy():
 	def __init__(self, host, port, useAppEngine):
+		print(port)	
 		if (useAppEngine):
 			self.db = MySQLdb.connect(
 				unix_socket=host,
