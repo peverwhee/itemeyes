@@ -32,7 +32,7 @@ def main():
 	state = 'CA'
 	zipCode = 12345
 	token = "1234xyz"
-	for i in range(10001, 12251):
+	for i in range(1, 2):
 		brand = 'brand' + `i`
 		model = 'model' + `i`
 		company = 'company' + `i`

@@ -69,19 +69,12 @@ class S(BaseHTTPRequestHandler):
         self._set_headers()
         
     def do_POST(self):
-        startTime = datetime.datetime.now()
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
         jsonResponse = handlePostRequest(self.path, post_data)
         self._set_headers()
         #convert json Response to string and pass into here
         self.wfile.write(json.dumps(jsonResponse))
-        stopTime = datetime.datetime.now()
-        timeDif = stopTime - startTime
-        print("Request: ")
-        print(json.dumps(jsonResponse))
-        print("time diff: ")
-        print(timeDif)
 
 def handlePostRequest(path, data):
 
