@@ -1,8 +1,14 @@
 import requests
 import json
+import datetime
 
 def sendPostRequest(token, brand, model, zipCode):
-	API_ENDPOINT = "https://itemeyes-199123.appspot.com/search"
+	# for app engine:
+	#API_ENDPOINT = "https://itemeyes-199123.appspot.com/add"
+	# for kubernetes:
+	API_ENDPOINT = "http://35.193.33.30/add"
+	# for compute:
+	#API_ENDPOINT = "http://35.185.19.16/add"
 
 	data = {'brand': brand,
 			'model': model,
@@ -20,10 +26,14 @@ def main():
 	state = 'CA'
 	zipCode = 12345
 	token = "1234xyz"
+	print("start time is:")
+	print(datetime.datetime.now().time())
 	for i in range(114, 124):
 		brand = 'brand' + `i`
 		model = 'model' + `i`
 		sendPostRequest(token, brand, model, zipCode)
+	print("end time is:")
+	print(datetime.datetime.now().time())
 
 
 if __name__ == '__main__':
