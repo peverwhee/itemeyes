@@ -1,3 +1,5 @@
+// JavaScript for displaying tabs on both index and login pages
+
 function openTab(evt, tabName) {
 	var i, tabcontent, tablinks;
 	tabcontent = document.getElementsByClassName("tabcontent");

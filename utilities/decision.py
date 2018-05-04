@@ -1,3 +1,4 @@
+# decision calculator!
 
 def main():
 	print("Hi! Please input your weights for each criterion. The weights are decimals that sum to 1.")

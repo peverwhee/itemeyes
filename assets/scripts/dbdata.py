@@ -1,3 +1,5 @@
+# class definitions for the ItemEyes data
+
 
 class User():
 	def __init__(self, first, last, username, passHash):

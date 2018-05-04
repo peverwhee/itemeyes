@@ -1,3 +1,5 @@
+// JavaScript summoned when logging into ItemEyes
+
 window.onload = function() {
 	var token = localStorage.getItem("token");
 	if (token != null && token != "" && token != undefined) {

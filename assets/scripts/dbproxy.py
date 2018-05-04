@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# acts as proxy between JavaScript and database
+
 import MySQLdb
 import random, string
 import os

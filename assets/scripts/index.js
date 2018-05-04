@@ -1,3 +1,5 @@
+// JavaScript for searching and adding
+
 window.onload = function() {
 	var token = localStorage.getItem("token");
 	if (token === null || token === "") {

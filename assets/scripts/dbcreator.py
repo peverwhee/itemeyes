@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# creates the ItemEyes database and its tables
+
 import MySQLdb
 
 class CreateDB():
