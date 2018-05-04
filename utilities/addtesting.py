@@ -6,9 +6,9 @@ def sendPostRequest(token, brand, model, company, address, city, state, zipCode)
 	# for app engine:
 	#API_ENDPOINT = "https://itemeyes-199123.appspot.com/add"
 	# for kubernetes:
-	#API_ENDPOINT = "http://35.193.33.30/add"
+	API_ENDPOINT = "http://35.193.33.30/add"
 	# for compute:
-	API_ENDPOINT = "http://35.185.19.16/add"
+	#API_ENDPOINT = "http://35.185.19.16/add"
 
 	data = {'brand': brand,
 			'model': model,
@@ -32,7 +32,7 @@ def main():
 	state = 'CA'
 	zipCode = 12345
 	token = "1234xyz"
-	for i in range(2, 12250):
+	for i in range(12571, 12671):
 		brand = 'brand' + `i`
 		model = 'model' + `i`
 		company = 'company' + `i`

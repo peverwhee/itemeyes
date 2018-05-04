@@ -4,11 +4,11 @@ import datetime
 
 def sendPostRequest(token, brand, model, zipCode):
 	# for app engine:
-	API_ENDPOINT = "https://itemeyes-199123.appspot.com/search"
+	#API_ENDPOINT = "https://itemeyes-199123.appspot.com/search"
 	# for kubernetes:
 	#API_ENDPOINT = "http://35.193.33.30/search"
 	# for compute:
-	#API_ENDPOINT = "http://35.185.19.16/search"
+	API_ENDPOINT = "http://35.185.19.16/search"
 
 	data = {'brand': brand,
 			'model': model,
